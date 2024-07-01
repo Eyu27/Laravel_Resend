@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Resend\Laravel\Facades\Resend;
+use Illuminate\Http\RedirectResponse;
 
 class ChirpController extends Controller
 {
@@ -16,7 +17,7 @@ class ChirpController extends Controller
     {
         return view('chirps.index', [
             'chirps' => Chirp::with('user')->latest()->get(),
-        ]);
+        ]); 
     }
 
     /**
@@ -38,7 +39,16 @@ class ChirpController extends Controller
 
         $request->user()->chirps()->create($validated);
 
-        return redirect(route('chirps.index'));
+        $res = Resend::emails()->send([
+            'from' => 'Eyuel <onboarding@resend.dev>',
+            'to' => ["eyubeten@gmail.com"],
+            'subject' => 'hello world',
+            'html' =>"testing resend",
+        ]);
+
+        // dd($res);
+
+         return redirect(route('chirps.index'));
     }
 
     /**
