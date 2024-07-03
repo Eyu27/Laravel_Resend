@@ -111,7 +111,7 @@ class ChirpController extends Controller
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="https://i.imgur.com/lcQ7Z5c.jpg" alt="Beten Ethiopia" class="logo">
+            <img src="https://example.com/logo.png" alt="Logo" class="logo">
             <h1>Welcome to Our Service</h1>
         </div>
         <div class="content">
